@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource death;
     [SerializeField] private AudioSource ghostdeath;
     [SerializeField] private AudioSource startgame;
+    [SerializeField] private bool firstRound=true;
     private bool isGameready = false;//
 
     public int score { get; private set; } = 0;
@@ -65,35 +66,43 @@ public class GameManager : MonoBehaviour
 
     private void NewGame()
     {
+        firstRound = true;
         SetScore(0);
         SetLives(3);
         NewRound();
+        
     }
 
     private void NewRound()
     {
+        //Debug.Log("New Round");
         gameOverText.enabled = false;
         gameStartText.text = "Ready!"; //
         gameStartText.enabled = true; //
         isGameready = false;
-       
-        foreach (Transform pellet in pellets)
+        Stop();
+        if (firstRound)
         {
-            pellet.gameObject.SetActive(true);
+            foreach (Transform pellet in pellets)
+            {
+                pellet.gameObject.SetActive(true);
+            }
         }
+        
 
         ResetState();           // キャラクターの状態をリセット
         //Time.timeScale = 0f;//
-        Invoke(nameof(HideGameStartText), 1.5f);//
+        Invoke(nameof(HideGameStart), 1.5f);//
     }
     private void StartGame()
     {
         gameStartText.enabled = false;
         //Time.timeScale = 2f;//
     }
-    private void HideGameStartText ()
+    private void HideGameStart ()
     {
         gameStartText.enabled = false;
+        KeepMove();
     }
 
     private void ResetState()
@@ -106,6 +115,29 @@ public class GameManager : MonoBehaviour
         pacman.ResetState();            // パックマンの状態をリセット
     }
 
+    private void Stop()
+    {
+        //Debug.Log(pacman.gameObject.GetComponent<Movement>().speed);
+
+        foreach (Ghost ghost in ghosts)
+        {
+            //Debug.Log(ghost.gameObject.GetComponent<Movement>().speed);
+            ghost.gameObject.GetComponent<Movement>().speed = 0;
+        }
+        pacman.gameObject.GetComponent<Movement>().speed = 0;
+        
+    }
+    private void KeepMove()
+    {
+
+        foreach (Ghost ghost in ghosts)
+        {
+            //Debug.Log(ghost.gameObject.GetComponent<Movement>().speed);
+            ghost.gameObject.GetComponent<Movement>().speed = ghost.gameObject.GetComponent<Movement>().MaxSpeed;
+        }
+        pacman.gameObject.GetComponent<Movement>().speed = pacman.gameObject.GetComponent<Movement>().MaxSpeed;
+
+    }
     private void GameOver()
     {
         gameOverText.enabled = true;
@@ -116,6 +148,7 @@ public class GameManager : MonoBehaviour
         }
 
         pacman.gameObject.SetActive(false);             // パックマンを非表示
+
     }
 
     private void SetLives(int lives)
@@ -133,7 +166,7 @@ public class GameManager : MonoBehaviour
     public void PacmanEaten()
     {
         pacman.DeathSequence();         // パックマンの死亡処理
-
+        firstRound = false;
         SetLives(lives - 1);            // 残機を減らす
         if (death != null)
         {
@@ -141,7 +174,7 @@ public class GameManager : MonoBehaviour
         }
         if (lives > 0)
         {
-            Invoke(nameof(ResetState), 3f);     // 3秒後にリセット
+            Invoke(nameof(NewRound), 1.5f);     // 1.5秒後にリセット
         }
         else
         {

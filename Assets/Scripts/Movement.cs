@@ -4,6 +4,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float speed = 8f;
+    private float maxSpeed;
     public float speedMultiplier = 1f;
     public Vector2 initialDirection;
     public LayerMask obstacleLayer;
@@ -12,15 +13,19 @@ public class Movement : MonoBehaviour
     public Vector2 direction { get; private set; }
     public Vector2 nextDirection { get; private set; }
     public Vector3 startingPosition { get; private set; }
+    public float MaxSpeed { get => maxSpeed; set => maxSpeed = value; }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         startingPosition = transform.position;
+        MaxSpeed = speed;
+
     }
 
     private void Start()
     {
+        
         ResetState();
     }
 

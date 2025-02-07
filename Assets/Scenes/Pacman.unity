@@ -2151,6 +2151,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 279137838292042153, guid: f9fff4d0f60cfe4409b50aba00c971ba, type: 3}
+      propertyPath: maxSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 798198474998548684, guid: f9fff4d0f60cfe4409b50aba00c971ba, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -7399,6 +7403,10 @@ PrefabInstance:
       propertyPath: sprites.Array.data[1]
       value: 
       objectReference: {fileID: 21300000, guid: d5e15c75b88558b469ecc97990cce215, type: 3}
+    - target: {fileID: 3235949433976540158, guid: bc42a92960c55754290db72cdfd73a6b, type: 3}
+      propertyPath: maxSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4556167864304445278, guid: bc42a92960c55754290db72cdfd73a6b, type: 3}
       propertyPath: duration
       value: 20
@@ -7967,6 +7975,10 @@ PrefabInstance:
       propertyPath: initialBehavior
       value: 
       objectReference: {fileID: 1147767380}
+    - target: {fileID: 2582659995556609943, guid: 4a3359dc2c4ce9c4e91a26b50d67f3d6, type: 3}
+      propertyPath: maxSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3106081587034060530, guid: 4a3359dc2c4ce9c4e91a26b50d67f3d6, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -11261,6 +11273,10 @@ PrefabInstance:
     - target: {fileID: 8428045727493798027, guid: 42031f61390711646a2da7f02e874901, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951495544430965230, guid: 42031f61390711646a2da7f02e874901, type: 3}
+      propertyPath: maxSpeed
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
